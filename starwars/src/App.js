@@ -17,7 +17,6 @@ class App extends Component {
 
   componentDidUpdate(_, prevState) {
     if (prevState.nextPage !== this.state.nextPage) {
-      console.log("Next!", this.state.nextPage);
       this.getCharacters(this.state.nextPage);
     }
     
@@ -32,7 +31,6 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        console.log(data);
         this.addCharacters(data.results);
         this.setState({ nextPage: data.next });
       })
