@@ -3,7 +3,6 @@ import CharacterList from './CharacterList';
 import './StarWars.css';
 
 const StarWarsOpeningScene = ({ characterList }) => {
-  console.log(characterList);
   return (
     <div id="titles">
       <div id="titlecontent">

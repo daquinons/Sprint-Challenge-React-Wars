@@ -6,12 +6,21 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      starwarsChars: [],
+      nextPage: ""
     };
   }
 
   componentDidMount() {
     this.getCharacters('https://swapi.co/api/people/');
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.nextPage !== this.state.nextPage) {
+      console.log("Next!", this.state.nextPage);
+      this.getCharacters(this.state.nextPage);
+    }
+    
   }
 
   getCharacters = URL => {
@@ -23,12 +32,24 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ starwarsChars: data.results });
+        console.log(data);
+        this.addCharacters(data.results);
+        this.setState({ nextPage: data.next });
       })
       .catch(err => {
         throw new Error(err);
       });
   };
+
+  addCharacters = newCharacters => {
+    this.setState(oldState => {
+      return (
+        {
+          starwarsChars: oldState.starwarsChars.concat(newCharacters),
+        }
+      )
+    })
+  }
 
   render() {
     return (
