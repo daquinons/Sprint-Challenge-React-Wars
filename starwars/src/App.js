@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidUpdate(_, prevState) {
-    if (prevState.nextPage !== this.state.nextPage) {
+    if (this.state.nextPage && prevState.nextPage !== this.state.nextPage) {
       this.getCharacters(this.state.nextPage);
     }
     
