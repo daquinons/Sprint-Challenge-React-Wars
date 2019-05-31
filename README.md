@@ -26,11 +26,19 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] What is React JS and what problems does it try and solve? Support your answer with concepts introduced in class and from your personal research on the web.
 
+React JS is a library to create user interfaces in the web in a practical way. It solves problems like reusability (using components), DOM manipulation (creates a virtual DOM and when there is a change it only updates the part of the DOM that changed instead of updating the whole page). Thanks to this it can be used to create very complex applications.
+
 - [ ] What does it mean to _think_ in react?
+
+It means to think in components. Every part of the application will be a component, from the smallest part to the biggest. It also requires to think in how these parts communicate and share data.
 
 - [ ] Describe state.
 
+State is data that a component stores and can be modified when interacting with it. When the state changes, the component will change reacting to that new state. State should always be stored in the top level component of the application and it can't be accessed from other components.
+
 - [ ] Describe props.
+
+Props are data that is passed to a component when creating it. We used props to pass data from one component to another, mostly from the top level, who stores the state of the whole application, to child components.
 
 ## Project Set Up
 
