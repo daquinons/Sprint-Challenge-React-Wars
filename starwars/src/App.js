@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
+import StarWarsOpeningScene from './components/StarWarsOpeningScene';
 import './App.css';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      starwarsChars: [],
+      nextPage: ""
     };
   }
 
   componentDidMount() {
     this.getCharacters('https://swapi.co/api/people/');
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.nextPage && prevState.nextPage !== this.state.nextPage) {
+      this.getCharacters(this.state.nextPage);
+    }
+    
   }
 
   getCharacters = URL => {
@@ -22,17 +31,28 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ starwarsChars: data.results });
+        this.addCharacters(data.results);
+        this.setState({ nextPage: data.next });
       })
       .catch(err => {
         throw new Error(err);
       });
   };
 
+  addCharacters = newCharacters => {
+    this.setState(oldState => {
+      return (
+        {
+          starwarsChars: oldState.starwarsChars.concat(newCharacters),
+        }
+      )
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <h1 className="Header">React Wars</h1>
+        <StarWarsOpeningScene characterList={this.state.starwarsChars} />
       </div>
     );
   }
